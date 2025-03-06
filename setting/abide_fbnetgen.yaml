@@ -1,0 +1,53 @@
+data:
+  dataset: ABIDE
+  batch_size: 16
+  test_batch_size: 16
+  val_batch_size: 16
+  train_set: 0.7
+  val_set: 0.1
+  time_seires: 'E:\ADHD\ADHD\adhd.npy'
+#  'E:\ADHD\ADHD\adhd.npy'
+#  'E:\ABIDE\ABIDE_pcp\abide.npy'
+#  '/mnt/5468e/ypzhang/LiYuxin/ABIDE/abide.npy'
+
+model:
+  # seq, gnn, fbnetgen 
+  type: fbnetgen
+
+  # gru or cnn 
+  extractor_type: gru
+  embedding_size: 8
+  window_size: 4
+
+  cnn_pool_size: 16
+
+  # product or linear
+  graph_generation: product
+
+  num_gru_layers: 4
+
+  dropout: 0.5
+  reduced_matrix: false
+  shrink_matrix: false
+  ratio: 15
+
+
+train:
+  # normal or bilevel 
+  method: normal
+  lr: 1.0e-4
+  weight_decay: 1.0e-3
+  epochs: 9
+  optimizer: adam
+
+  group_loss: false
+  sparsity_loss: false
+  sim_loss: false
+
+  sparsity_loss_weight: 1.0e-3
+  sim_loss_weight: 1.0e-3
+
+  log_folder: result
+  
+  # uniform or pearson
+  pure_gnn_graph: pearson
