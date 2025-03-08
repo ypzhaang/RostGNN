@@ -1,30 +1,15 @@
-# FBNETGEN
-
+# Robust Spatio-Temporal Graph Neural Networks with Sparse Structure Learning
+Yupei Zhang, Yuxin Li, Shuhui Liu, and Xuequn Shang
+## Overview
+>This paper focuses on the problem of spatio-temporal graph classification by introducing sparse structure learning to enhance its robustness and explainability. Spatio-temporal graph neural networks (STGNN) integrate spatial structure and temporal sequential features into GNN learning, resulting in promising performance in many applications. However, current STGNN models often fail to capture the discriminative sparse substructure and the smooth distribution of these samples. To this end, this paper introduces RostGNN, robust spatio-temporal graph neural networks, for achieving more discriminative graph representations. Concretely, RostGNN extracts the spatial and temporal features by performing gated recurrent units on the given time series data and calculating adjacent matrixes for graphs. Then, we impose the hard-thresholding approach on the final association matrix to obtain a sparse graph. Meanwhile, we calculate a similarity matrix from the side information of samples to smooth the achieved data representations and use fully connected networks for graph classification. We finally applied RostGNN to brain graph classification in experiments on two real-world datasets. The results demonstrate that RostGNN delivers robust and discriminative graph representations and performs better than compared methods, benefiting from the sparsity and manifold regularizers. Besides, RostGNN can potentially yield useful findings for understanding brain diseases.
+## RostGNN
+![img.png](img.png)
 ## Dataset
-
-### PNC and ABCD
-
-PNC can be accessed from [NIH](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000607.v3.p2), and ABCD can be accessed from [NIMH Data Archive](https://nda.nih.gov/).
-
-
-### ABIDE
-
-For those who can not access ABCD and PNC dataset, we also provide an open-source dataset, ABIDE. Please follow the [instruction](util/abide/readme.md) to download and process this dataset.
-
+>The used datasets in experiments are acquired from the Autism Brain Imaging Data Exchange [(ABIDE)](https://fcon\_1000.projects.nitrc.org/indi/abide) and Attention Deficit Hyperactivity Disorder [(ADHD)](https://fcon\_1000.projects.nitrc.org/indi/adhd200).
+Please follow the [instruction](util/abide/readme.md) to download and process this dataset.
+## Dependencies
+>The code requires Python >= 3.9 and PyTorch >= 1.10.1.
 ## Usage
-
-### PNC
-
-```bash
-python main.py --config_filename setting/pnc_fbnetgen.yaml
-```
-
-### ABCD 
-
-```bash
-python main.py --config_filename setting/abcd_fbnetgen.yaml
-```
-
 ### ABIDE 
 
 ```bash
@@ -37,32 +22,17 @@ All hyper parameters can be tuned in setting files.
 
 ```yaml
 model:
-  # For the model type, there are 3 choices: "seq", "gnn" or "fbnetgen". 
   type: fbnetgen
-
-  # For the feature extractor, there are 2 choices: "gru" or "cnn".
   extractor_type: gru
-
-  # For the feature extractor, there are 2 choices: "product" or "linear". 
-  # We suggest to use "product", since it is faster.
   graph_generation: product
-
-  # Two hyperparameters are tuned in our paper.
   embedding_size: 8
   window_size: 8
 
-
-
 train:
-  # For training method, there are 2 choices: "normal" or "bilevel".
-  # "bilevel" will be in effect only if the model.type is set as "fbnetgen"
-  # We suggest to use "normal".
   method: normal
-  
-  # If the model.type is set as "gnn", this hyper parameter will be in effect.
-  # There are 2 choices: "uniform" or "pearson".
   pure_gnn_graph: pearson
 ```
-
-## Performance
+## Tips
+>The complete code will be uploaded to the repository in a subsequent update.
+Copyright © 2024 YuPeiZhang. All rights reserved.
 
