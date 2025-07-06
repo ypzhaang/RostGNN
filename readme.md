@@ -31,8 +31,3 @@ model:
 train:
   method: normal
   pure_gnn_graph: pearson
-```
-## Tips
->The complete code will be uploaded to the repository in a subsequent update.
-Copyright © 2024 YuPeiZhang. All rights reserved.
-
